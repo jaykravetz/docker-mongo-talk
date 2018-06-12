@@ -6,7 +6,7 @@ let db;
 
 async function getDb() {
 	if (!db) {
-		let client = await mongo.connect("mongodb://localhost:27017");
+		let client = await mongo.connect("mongodb://mongo:27017");
 		db = client.db("babysitters");
 	}
 	return db;
