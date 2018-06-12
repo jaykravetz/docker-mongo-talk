@@ -10,12 +10,31 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ["$http", function($http) {
-    let self = this;
+    var self = this;
 
     self.list = [];
-
+    self.alerts = [];
+    
     $http.get("/babysitters").then(function(results) {
         self.list = results.data;
     });
+
+    self.delete = function(id) {
+      var deleted = _.findIndex(self.list, function(item) {
+        return item._id === id;
+      });
+
+      self.list.splice(deleted, 1);
+
+      self.alerts.push({
+        msg: "Deleted",
+        setTimeout: 2000,
+        type: "info"
+      });
+    };
+
+    self.closeAlert = function(index) {
+      self.alerts.splice(index, 1);
+    };
 
 }]);

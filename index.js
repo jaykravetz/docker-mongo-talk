@@ -22,9 +22,8 @@ app.get("/", function(req, res) {
 
 app.get("/babysitters", async function (req, res) {
 	let m = await getDb();
-	console.log(m);
+
 	m.collection("people").find({}).toArray(function(err, results) {
-		console.log(err, results);
 		res.send(results);
 	});
 });

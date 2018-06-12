@@ -13,9 +13,29 @@
         </div>
     </div>
 
-    <ul class="list-group">
-        <li ng-repeat="babysitter in $ctrl.list" class="list-group-item">
-            <span data-id="{{babysitter._id}}">{{babysitter.firstName}} {{ babysitter.lastName}}</span>
-        </li>
-    </ul>
+    <div uib-alert ng-repeat="alert in $ctrl.alerts" ng-class="'alert alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="person in $ctrl.list">
+            <td>{{ person.firstName }} {{ person.lastName }}</td>
+            <td>{{ person.age }} </td>
+            <td>{{ person.phone }}</td>
+            <td align="right">${{ person.pricePerHour }}.00 / hr</td>
+            <td align="right">
+                <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                <button ng-click="$ctrl.delete(person._id)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
