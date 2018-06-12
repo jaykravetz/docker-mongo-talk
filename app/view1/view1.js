@@ -24,12 +24,13 @@ angular.module('myApp.view1', ['ngRoute'])
         return item._id === id;
       });
 
-      self.list.splice(deleted, 1);
-
-      self.alerts.push({
-        msg: "Deleted",
-        setTimeout: 2000,
-        type: "info"
+      $http.delete("/babysitters/" + id).then(function() {
+        self.list.splice(deleted, 1);
+        self.alerts.push({
+          msg: "Deleted",
+          setTimeout: 2000,
+          type: "info"
+        });
       });
     };
 

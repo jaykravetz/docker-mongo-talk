@@ -1,5 +1,6 @@
 const express = require("express");
 const mongo = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId
 
 let db;
 
@@ -25,6 +26,16 @@ app.get("/babysitters", async function (req, res) {
 
 	m.collection("people").find({}).toArray(function(err, results) {
 		res.send(results);
+	});
+});
+
+app.delete("/babysitters/:id", async function(req, res) {
+	console.log(req.params.id);
+	let m = await getDb();
+	m.collection("people").deleteOne({ _id: ObjectId(req.params.id) }, function(err, result) {
+		console.log(err);
+		console.log(result);
+    res.status(204).send();
 	});
 });
 

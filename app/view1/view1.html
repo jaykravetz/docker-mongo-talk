@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div uib-alert ng-repeat="alert in $ctrl.alerts" ng-class="'alert alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+    <div uib-alert ng-repeat="alert in $ctrl.alerts track by $index" ng-class="'alert alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
     <table class="table table-striped">
         <thead>
